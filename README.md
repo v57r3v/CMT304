@@ -1,12 +1,61 @@
 java c
-Module   Code:                                                                                    CMT304
-Module   Title:                                                                                     Programming   Paradigms
-Assessment   Title:                                                          Analog,   Differentiable   and   Machine   Programming
-AssignmentThe attached measurements   .csv file contains   measurements obtained from the   analog   cir-   cuit   below.       It   is   a   csv   file   where   the   first   column   contains   the   time   and   the   second   col-   umn   the   voltage   measurement   at   x   in   the   circuit    (1,   000   datapoints   from   time   0   to   2π).   This circuit consists of analog   computing   components we   used   with   LTSpice   in   the   module   (ic indicates a   non-inverting integrator, + a   summer,   -   an   inverter   and   AB   a   multiplier).   The   data   in the csv file are   noisy voltage   measurements from   this   circuit.    Information   about the   values   a, textttb, and   x0   is   not   available.This   assignment   is   about   analysing   the   data   with   differentiable   programming   techniques   and   some questions about the approach as   given   by   the   tasks   below,   aligned   with   the   contents   of   part   three   of   the   module.    It   is   a   simple   example   to   demonstrate   your   understanding   of   the   programming   paradigms   involved.   There   are   of   course   other   approaches   one   can   use   to   analyse   the   data,   but   this   is   not   asked   for.The example has been kept simple to avoid the   need of   high   computational   resources.   This   should be executable with   reasonable CPU   resources without GPU; you can   of   course   also   use the   Linux   machines   in the COMSC   Linux   lab.Task   1 (worth   40%):   Write   a   python   program   using   differentiable   programming   techniques to approximate the   measurement data   in measurements   .csv with a   parameterised function   fp      :   R   '→   R,   t   →   x.    You   may   use   pytorch,   tensorflow   or   jax   for   this   (or   maybe   a   combi-   nation of these packages; using numpy and matplotlib for supporting functionality   is fine –   any other   packages   are   not   needed;   check with the coursework setter   if   in   doubt).   You   are   free to   choose   any function type   (some   analytical function,   a   代 写CMT304 Analog, Differentiable and Machine ProgrammingPython
-代做程序编程语言neural   network,   etc),   but   you   may   want   to   consider   the   circuit   diagram   to   choose   a   suitable   function   and   its   parameterisa-   tion.   Your code can produce the results in any   suitable   format,   on   the   terminal   or   in files   (do   not   submit   these).   You   should   report   these   results   with   Task   2.    Submit   a   single   python   file solving this task.    Assume measurements   .csv   is   in the directory the   python file   is   executed   from.Task   2 (worth   40%):   Justify   the   function   and   the   parameterisation   you   have   used   to   match the   data   and   explain what you   can   learn from this   about   the   circuit   given   your   results   from   Task   1.   Or, if   you   cannot   conclude   anything, explain   why   not.   Write   a   short   report   about   this of   up   to   400 words.Task   3   (worth   20%):    Under   the   assumption   that   the   analysis   program   for   Task      1   needs to   be very   efficient   on   a   CPU,   explain whether the   performance   of   a   particular   part   of your   code   could   be   improved   by   implementing   it   in   assembly   (there   is   no   need to   provide   code,   only   the   concept).    If   you   do   not   see   any   use   for   this,   explain   why   not   instead.    Make   sure you   refer   to   your   specific   code   and   state   any   assumptions   about   the   hardware,   if   applicable;   generic   arguments   are   not   needed.   Write   a   short   report   about   this   of   up   to   400 words.Submit   your   answers   to   Task   2   and   3   in   a   single   PDF   file,   with   clear   headings   indicating   the   task.   The   word   limits   for   Task   2   and   Task   3   are   an   upper   limit,   not   a   target   length.   Text longer   than   the   word   limit   for   each   point   may   be   ignored.
-Learning Outcomes Assessed
-•    Explain   the   conceptual   foundations, evaluate   and   apply   various   programming   paradigms,   such   as   logic,   functional,   scripting,   filter-based   programming,   pattern   matching   and quantum computing, to solve practical   problems.
-•    Discuss   and   contrast   the   issues, features, design   and   concepts   of   a   range   of   program-   ming paradigms and languages to be able to select   a   suitable   programming   paradigm   to solve   a   problem
+Module Code:  CMT304 
+Module Title:  Programming   Paradigms 
+Assessment Title: Logic   Programming 
+Assignment 
+Consider the following situation:Patent   requests   are   submitted   to   the   patent   office   and   are   reviewed   by   members   of   the   tech-   nical board.   To find a   good   match between   patent   requests and   board   members   (referees),   every   member   of   the   technical   board   declares   their   expertise   for   each   submitted   request   that   needs   to   be   reviewed:
+EXPERT,   KNOWLEDGEABLE,   FAMILIAR   or   INEXPERTFor   example,   declaring   EXPERT   for   a   given   patent   request,   means   “I   am   an   expert   on   the   topic   of   this   request”   .   The   goal   is   to   write   a   program   to   automate   this   process.   Using   a   list   of bids,   indicating the   level   of   expertise for   each   patent   request   and   board   member,   it   should   assign   each   submitted   patent   request   to   a   specific   number   of   n   members   of   the   technical   board such that
+•   the   workloads   of   the   technical   board   members   are   approximately   equal, that   is, do   not differ by   more   than   m;
+•    no   member of the technical   board   is   required to   review a   submission   that   is   placed   in   the   INEXPERT   category;
+•    no member of the technical board is   required to   review   more thank   submissions from   the   FAMILIAR   category;
+•   the total   number of cases when a   submission   is   assigned   to   a   member   who   placed   it   in the   EXPERT   category   is as   large as   possible.
+The parameters n, mandk are arguments set when   calling the   program.
+Task 1: Write   a   logic   program   in   ASP   which   finds   all   solutions   to   the   problem, given   n,   m,   k.Task   1:    Write   an   ASP   program   (coursework.lp)   that   solves   the   problem   for   any   instance.   Your   program   will   receive   as   input   a   set   bid/3 of   triples   mem, req, exp, such   that   the   member mem   has   declared   to   have   expertise   exp   for   request   req.    The   output   of   your   program   is   a set   assign/2   of   pairs   mem   and   req   such   that   the   member   mem   has   been   assigned   to   review request req.
+Make   sure   you   document   your   code   so   it   is   clear   how   it   should   be   used   and   what   the   approach to solving the problem   is.   Document your code so the   following   is   clear.
+1.    How   it   should   be   used.
+2.   What   the   approach   to   solving   the   problem   is.    In   particular, you   need   to   explain what each   rule   achieves   and how the   rule   achieves   it.
+Include your   name and student   id   in the comments.
+Task 2: Write   a   short   report   on   logic   programming   related   to   the   problem:
+1.    Provide, in   up   to   300 words, an   analysis   of   the   design   and   functioning   of   your   program   in   terms   of   the   Guess-and-Test   modeling   methodology.
+The   word   limits   are   an   upper   limit,   not   a   target   length.    Text   longer   than   the   wor代 写CMT304 Logic ProgrammingR
+代做程序编程语言d   limit   for   each point will   be   ignored.
+Learning Outcomes Assessed 
+•    Explain   the   conceptual   foundations, evaluate   and   apply   various   programming   paradigms,   such   as   logic,   functional,   scripting,   filter-based   programming,   pattern   matching   and   quantum computing, to solve practical   problems.
+•    Discuss   and   contrast   the   issues, features, design   and   concepts   of   a   range   of   program-   ming paradigms and languages to be able to select   a   suitable   programming   paradigm   to   solve   a   problem.
+Criteria for assessment 
+Task 1: maximum   50   marks, assessed   according   to   the   following   scale
+Fail 
+0 
+No code has been submitted. 
+1 − 14 
+Code does not run or does not produce valid output for any valid input; little to no relevant documentation. 
+15 − 24 Code is valid without syntax errors and creates a valid output for every valid input (or produces a suitable error message for valid cases it cannot process). Even if the output is not a solution, a suitable attempt to solve the problem is visible. An attempt to document the code has been made. 
+Pass 
+25 − 29 Code is valid without syntax errors and creates a valid output for every valid input (or produces a suitable error message for valid cases it cannot process). A suitable attempt to solve the problem has been made, that will often find at least one solution (if there is any).    The attempt has been reasonably documented, but no consideration has been given to optimise the program’s performance. 
+Merit 
+30 − 34 Code is valid without syntax errors and creates a valid output for every valid input (or produces a suitable error message for valid cases it cannot process). A suitable attempt to solve the problem has been made, that will find all solutions (if there are any). The attempt has been well documented. 
+Distinction 
+35 − 50 Code is valid without syntax errors and creates a valid output for every valid input. A suitable attempt to solve the problem has been made, that will find all solutions (if there are any) for all problems, with excellent performance. The attempt has been well documented and clearly shows an effort to op- timise the program’s performance, e.g. by using efficient algorithms and data repres1entations and also some heuristics. 
+Task 2: maximum   50   marks, assessed   according   to   the   following   scale
+Fail 
+0 
+No document has been submitted. 
+1 − 14 
+At most an incomplete attempt to analyse the design and functioning of the program has been made. 
+15 − 24 
+An attempt has been made to analyse the design and functioning of the program. 
+Pass 
+25 − 29 
+A suitable attempt has been made to analyse the design and functioning of the program. 
+Merit 
+30 − 34 
+The analysis of the design and functioning of the program is well-developed, showing a clear understanding of the Guess-and-Test methodology. 
+Distinction 
+35 − 50 The analysis of the design and functioning of the program shows a clear understanding of the Guess-and-Test methodology and shows an under- standing of related performance issues. 
+
+
+
+
 
          
 加QQ：99515681  WX：codinghelp  Email: 99515681@qq.com
